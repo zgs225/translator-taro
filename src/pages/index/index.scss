@@ -1,0 +1,40 @@
+@import '../../assets/styles/common.scss';
+
+.index {
+  padding: 0 20px;
+  .header {
+    .legend {
+      font-family: $headerFontFamily;
+      font-weight: bold;
+      font-size: 64px;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .input-box {
+      display: flex;
+      align-items: center;
+      background-color: $grey;
+      padding: 20px;
+      border-radius: 10px;
+
+      .search {
+        height: 40px;
+        width: 40px;
+        margin-right: 20px;
+        position: relative;
+        top: -2px;
+      }
+
+      input {
+        flex: 1;
+      }
+
+      .close {
+        height: 50px;
+        width: 50px;
+      }
+    }
+  }
+}

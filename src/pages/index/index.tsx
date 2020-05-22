@@ -1,6 +1,9 @@
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import Taro, { Component, Config, closeSocket } from '@tarojs/taro'
+import { View, Text, Input, Image } from '@tarojs/components'
 import './index.scss'
+
+import searchIcon from '../../assets/icons/search.svg';
+import closeIcon from '../../assets/icons/close.svg';
 
 export default class Index extends Component {
 
@@ -22,13 +25,22 @@ export default class Index extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '多国翻译词典'
   }
 
   render () {
     return (
       <View className='index'>
-        <Text>Hello world!</Text>
+         <View className='header'>
+            <Text className='legend'>
+              Dictionary
+            </Text>
+            <View className='input-box'>
+              <Image src={searchIcon} className='search' mode='scaleToFill'></Image>
+              <Input placeholder='请输入单词' maxLength={256}></Input>
+              <Image src={closeIcon} className='close' mode='scaleToFill'></Image>
+            </View>
+        </View>
       </View>
     )
   }
