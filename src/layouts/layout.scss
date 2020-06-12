@@ -1,0 +1,24 @@
+@import '../assets/styles/common.scss';
+
+.app {
+  .navbar {
+    background-color: $navbarBackgroundColor;
+    color: #fefefe;
+    padding: 100px 0px $paddingGap $paddingGap;
+
+    .left {
+      display: flex;
+      align-items: center;
+
+      .logo {
+        height: 1.4rem;
+      }
+
+      .brand {
+        font-size: 1.1rem;
+        color: #e6e6e6;
+        font-weight: bold;
+      }
+    }
+  }
+}
