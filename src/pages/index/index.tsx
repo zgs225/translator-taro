@@ -51,6 +51,10 @@ export default class Index extends Component {
     })
   }
 
+  onClearTapped(e: any) {
+
+  }
+
   render () {
     return (
       <Layout>
@@ -59,7 +63,7 @@ export default class Index extends Component {
               <View className='input-box'>
                 <Image src={searchIcon} className='search' mode='scaleToFill'></Image>
                 <Input placeholder='请输入单词或者句子' maxLength={256} confirmType='search' value={this.originText} onInput={this.onInput}></Input>
-                <Image src={closeIcon} className='close' mode='scaleToFill'></Image>
+                <Image src={closeIcon} className='close' mode='scaleToFill' onClick='onClearTapped'></Image>
               </View>
           </View>
         </View>
