@@ -7,10 +7,11 @@ import './index.scss'
 
 import searchIcon from '../../assets/icons/search.svg';
 import closeIcon from '../../assets/icons/close.svg';
+import { inject, observer } from '@tarojs/mobx'
 
-export default class Index extends Component {
-  protected originText: string = ''
-
+@inject('searchStore')
+@observer
+export default class Index extends Component<any> {
   protected timer: Timer
 
   constructor() {
@@ -45,25 +46,24 @@ export default class Index extends Component {
   }
 
   onInput(e: any) {
-    this.originText = e.detail.value
-    this.timer.run(() => {
-      console.log(this.originText)
-    })
   }
 
-  onClearTapped(e: any) {
-
+  onClearTapped() {
+    const { searchStore } = this.props
+    searchStore.reset()
   }
 
   render () {
+    console.log(this.props)
+    const { searchStore: { text }} = this.props
     return (
       <Layout>
         <View className='index'>
            <View className='header'>
               <View className='input-box'>
                 <Image src={searchIcon} className='search' mode='scaleToFill'></Image>
-                <Input placeholder='请输入单词或者句子' maxLength={256} confirmType='search' value={this.originText} onInput={this.onInput}></Input>
-                <Image src={closeIcon} className='close' mode='scaleToFill' onClick='onClearTapped'></Image>
+                <Input placeholder='请输入单词或者句子' maxLength={256} confirmType='search' value={text} onInput={this.onInput}></Input>
+                <Image src={closeIcon} className='close' mode='scaleToFill' onClick={this.onClearTapped}></Image>
               </View>
           </View>
         </View>

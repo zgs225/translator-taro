@@ -1,5 +1,7 @@
 import Taro, { Component, Config } from '@tarojs/taro'
+import { Provider } from '@tarojs/mobx'
 import Index from './pages/index'
+import Stores from './stores'
 
 import './app.scss'
 
@@ -43,7 +45,9 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Index />
+      <Provider store={Stores}>
+        <Index/>
+      </Provider>
     )
   }
 }
