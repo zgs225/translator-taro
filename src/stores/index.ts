@@ -1,5 +1,13 @@
-import searchStore from './search'
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { createLogger } from 'redux-logger'
+import rootReducer from '../reducers'
 
-export default {
-  searchStore
+const middlewares = [
+  thunkMiddleware,
+  createLogger()
+]
+
+export default function configStore() {
+  return createStore(rootReducer, applyMiddleware(...middlewares))
 }

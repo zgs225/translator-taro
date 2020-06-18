@@ -2,22 +2,31 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text, Input, Image } from '@tarojs/components'
 import Timer from '../../utils/timer'
 import Layout from '../../layouts/layout'
+import { bindActionCreators } from 'redux'
+import { connect } from '@tarojs/redux'
 
 import './index.scss'
 
 import searchIcon from '../../assets/icons/search.svg';
 import closeIcon from '../../assets/icons/close.svg';
-import { inject, observer } from '@tarojs/mobx'
 
-@inject('searchStore')
-@observer
-export default class Index extends Component<any> {
-  protected timer: Timer
+import * as Actions from '../../actions/search'
 
-  constructor() {
-    super(arguments)
-    this.timer = Timer.delay(300)
+function mapStateToProps(state: any) {
+  return {
+    search: state.search.toJS()
   }
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    ...bindActionCreators(Actions, dispatch)
+  }
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Index extends Component<any> {
+  protected timer: Timer = Timer.delay(300)
 
   componentWillMount () { }
 
@@ -46,23 +55,23 @@ export default class Index extends Component<any> {
   }
 
   onInput(e: any) {
+    const { setText } = this.props
+    setText(e.detail.value)
   }
 
   onClearTapped() {
-    const { searchStore } = this.props
-    searchStore.reset()
+    const { reset } = this.props
+    reset()
   }
 
   render () {
-    console.log(this.props)
-    const { searchStore: { text }} = this.props
     return (
       <Layout>
         <View className='index'>
            <View className='header'>
               <View className='input-box'>
                 <Image src={searchIcon} className='search' mode='scaleToFill'></Image>
-                <Input placeholder='请输入单词或者句子' maxLength={256} confirmType='search' value={text} onInput={this.onInput}></Input>
+                <Input placeholder='请输入单词或者句子' maxLength={256} confirmType='search' value={this.props.search.text} onInput={this.onInput}></Input>
                 <Image src={closeIcon} className='close' mode='scaleToFill' onClick={this.onClearTapped}></Image>
               </View>
           </View>

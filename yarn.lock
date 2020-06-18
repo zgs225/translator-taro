@@ -1222,35 +1222,6 @@
     webpack-chain "4.9.0"
     webpack-format-messages "^2.0.5"
 
-"@tarojs/mobx-common@^2.2.9":
-  version "2.2.9"
-  resolved "https://registry.yarnpkg.com/@tarojs/mobx-common/-/mobx-common-2.2.9.tgz#cbf14ea5c3ede34c5fff537397de34695224e382"
-  integrity sha512-XW8RZ2jFspThadd2BUY9pDoAarTKaU4Qgp9tPXI/vsmyt4QEfjeCLnYAwAuly/7WSYfo9alk5uC/Wdzhkui3eQ==
-
-"@tarojs/mobx-h5@^2.2.9":
-  version "2.2.9"
-  resolved "https://registry.yarnpkg.com/@tarojs/mobx-h5/-/mobx-h5-2.2.9.tgz#4b9c7e6fef749318dce02bcb50c379046cd6093e"
-  integrity sha512-8M8sXRKKp3wVislXiFLyijIcmFPflybjgwvAZAh4lK6E8Db+ZTApcFs1uNiOgsx9xHN1an4RDHvxRDoJNCYE6A==
-  dependencies:
-    "@tarojs/mobx-common" "^2.2.9"
-    "@tarojs/taro-h5" "^2.2.9"
-
-"@tarojs/mobx-rn@^2.2.9":
-  version "2.2.9"
-  resolved "https://registry.yarnpkg.com/@tarojs/mobx-rn/-/mobx-rn-2.2.9.tgz#18b4a718c30b50cd1aad2e1f64b9f48872f7332e"
-  integrity sha512-jOoEAitlmPmENaOsruVQHuOPza9pem14VfHPuwKhzBgTlVR79ifl3Tp2scPlT9g454zhNe7JJEJ3iG8hu1/fdw==
-  dependencies:
-    "@tarojs/mobx-common" "^2.2.9"
-    "@tarojs/taro-rn" "^2.2.9"
-
-"@tarojs/mobx@^2.2.9":
-  version "2.2.9"
-  resolved "https://registry.yarnpkg.com/@tarojs/mobx/-/mobx-2.2.9.tgz#c13e37289af9910c8e88cd1ee7b79552754596c1"
-  integrity sha512-pRJVA5RUgkcmRiwKL8psxTcBS25Gubcpa3mO5xwOZ0btVXgR5C8jRrAduFLniskg8+tnjFx+A9qnnm59Zw8iPQ==
-  dependencies:
-    "@tarojs/mobx-common" "^2.2.9"
-    "@tarojs/taro" "^2.2.9"
-
 "@tarojs/plugin-sass@^2.2.6":
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/@tarojs/plugin-sass/-/plugin-sass-2.2.6.tgz#39aaa1abe25eb77362f47316aa46568b550507e2"
@@ -1258,6 +1229,24 @@
   dependencies:
     node-sass "^4.12.0"
     scss-bundle "^2.5.1"
+
+"@tarojs/redux-h5@^2.2.9":
+  version "2.2.9"
+  resolved "https://registry.yarnpkg.com/@tarojs/redux-h5/-/redux-h5-2.2.9.tgz#4055cedcb2108d748f6e806b8e956cbd6c991a4d"
+  integrity sha512-d56n7nvhU3+4Siqj3SEWWc3NMw0a2eA6N2bBW/jXWVG8ct6lGOPWGG+2vR7+DqggATVt77+acejDeOp/jYR9cA==
+  dependencies:
+    hoist-non-react-statics "^2.5.0"
+    invariant "^2.2.4"
+    loose-envify "^1.1.0"
+    prop-types "^15.6.1"
+
+"@tarojs/redux@^2.2.9":
+  version "2.2.9"
+  resolved "https://registry.yarnpkg.com/@tarojs/redux/-/redux-2.2.9.tgz#c5a2459e62ec2bf0b5d9531edb100acc35ba51d0"
+  integrity sha512-GWDM7/Qj7Mf/LIPPRR3isa7hP/lTXTD4nO2n+A0blZL2O9r6qALj7kxptdd/m4iUzw6eFrQc3qPYHuVTR7qWhw==
+  dependencies:
+    "@tarojs/taro" "^2.2.9"
+    "@tarojs/utils" "^2.2.9"
 
 "@tarojs/router@2.2.6":
   version "2.2.6"
@@ -1299,17 +1288,6 @@
     raf "^3.4.1"
     whatwg-fetch "^2.0.4"
 
-"@tarojs/taro-h5@^2.2.9":
-  version "2.2.9"
-  resolved "https://registry.yarnpkg.com/@tarojs/taro-h5/-/taro-h5-2.2.9.tgz#4ece849422b7e55b80c7759fe78c9f735435d78e"
-  integrity sha512-fw7ia5/boQ1v5uVtBXCf2gsmhQG/vu7N5/g2jd7Ji/MJ0OldKq1If8IK6hKRPAYbQEIwJ4tjCz72BaPDfHQdMw==
-  dependencies:
-    base64-js "^1.3.0"
-    jsonp-retry "^1.0.3"
-    mobile-detect "^1.4.2"
-    raf "^3.4.1"
-    whatwg-fetch "^2.0.4"
-
 "@tarojs/taro-qq@2.2.6":
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/@tarojs/taro-qq/-/taro-qq-2.2.6.tgz#934bcd6e7c4d544472a11f9804a7232c1ef5ff15"
@@ -1336,29 +1314,6 @@
   integrity sha512-Ya5gRi0k0gjoIWfv2VUKV1qs/hQz+TuQ3Kb2ctAZ4WX4qNLrAdFEMcsk0n5zcwx4/OrNbVNRV9zNGZ6DxHGPAw==
   dependencies:
     "@tarojs/taro" "^2.2.6"
-    babel-preset-expo "^5.2.0"
-    base64-js "^1.3.0"
-    expo-av "^6.0.0"
-    expo-brightness "^6.0.0"
-    expo-file-system "^6.0.0"
-    expo-image-picker "^6.0.0"
-    expo-keep-awake "^6.0.0"
-    expo-location "^6.0.0"
-    expo-sensors "^6.0.0"
-    nullthrows "^1.1.1"
-    react-native-image-crop-picker "^0.23.1"
-    react-native-image-zoom-viewer "^2.2.13"
-    react-native-root-siblings "^3.1.0"
-    react-native-root-toast "^3.0.1"
-    react-native-stylekit "^1.0.0"
-    react-native-unimodules "^0.5.3"
-
-"@tarojs/taro-rn@^2.2.9":
-  version "2.2.9"
-  resolved "https://registry.yarnpkg.com/@tarojs/taro-rn/-/taro-rn-2.2.9.tgz#982366b26ddb7380c8ecca785649ed80cc4ffd14"
-  integrity sha512-unfM0SWBnxjr22Lkq5QG3UUxZ5pKxk87ADI5FxRLwHYu9q5KuBlui3+Q6+cOZvSCKRTKdTbwTkGAnzekAOLhFQ==
-  dependencies:
-    "@tarojs/taro" "^2.2.9"
     babel-preset-expo "^5.2.0"
     base64-js "^1.3.0"
     expo-av "^6.0.0"
@@ -4176,6 +4131,11 @@ decode-uri-component@^0.2.0:
   resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
   integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
 
+deep-diff@^0.3.5:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
+  integrity sha1-wB3mPvsO7JeYgB1Ax+Da4ltYLIQ=
+
 deep-equal@^1.0.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.1.1.tgz#b5c98c942ceffaf7cb051e24e1434a25a2e6076a"
@@ -5743,6 +5703,11 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
+hoist-non-react-statics@^2.5.0:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
+  integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
+
 home-or-tmp@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -5943,6 +5908,11 @@ image-size@~0.5.0:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
   integrity sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=
+
+immutable@^4.0.0-rc.12:
+  version "4.0.0-rc.12"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.0.0-rc.12.tgz#ca59a7e4c19ae8d9bf74a97bdf0f6e2f2a5d0217"
+  integrity sha512-0M2XxkZLx/mi3t8NVwIm1g8nHoEmM9p9UBl/G9k4+hm0kBgOVdMV/B3CY5dQ8qG8qc80NN4gDV4HQv6FTJ5q7A==
 
 import-cwd@^2.0.0:
   version "2.1.0"
@@ -6921,7 +6891,7 @@ longest-streak@^2.0.1:
   resolved "https://registry.yarnpkg.com/longest-streak/-/longest-streak-2.0.4.tgz#b8599957da5b5dab64dee3fe316fa774597d90e4"
   integrity sha512-vM6rUVCVUJJt33bnmHiZEvr7wPT78ztX7rojL+LW51bHtLh6HTjx84LA5W4+oa6aKEJA7jJu5LR6vQRBpA5DVg==
 
-loose-envify@^1.0.0, loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -7354,11 +7324,6 @@ mobile-detect@^1.4.2:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/mobile-detect/-/mobile-detect-1.4.4.tgz#686c74e92d3cc06b09a9b3594b7b981494b137f6"
   integrity sha512-vTgEjKjS89C5yHL5qWPpT6BzKuOVqABp+A3Szpbx34pIy3sngxlGaFpgHhfj6fKze1w0QKeOSDbU7SKu7wDvRQ==
-
-mobx@4.8.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/mobx/-/mobx-4.8.0.tgz#6059feb9e0d3440acca5ae192daad63198b1180f"
-  integrity sha512-uR6FnrK50UEbV+zTXkOI+R0pAMb7xA5mkAWnKTMBcN6hAh57qAa9r0XMvsiPgpb8dS3Kw1x0sNhrrUNUcM+Pug==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -8918,6 +8883,31 @@ redent@^2.0.0:
     indent-string "^3.0.0"
     strip-indent "^2.0.0"
 
+redux-immutablejs@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/redux-immutablejs/-/redux-immutablejs-0.0.8.tgz#2c173dac1aaebfb20ec86e076b7e2ce65f487a41"
+  integrity sha1-LBc9rBquv7IOyG4Ha34s5l9IekE=
+
+redux-logger@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
+  integrity sha1-91VZZvMJjzyIYExEnPC69XeCdL8=
+  dependencies:
+    deep-diff "^0.3.5"
+
+redux-thunk@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+  integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
+
+redux@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
+  integrity sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
+  dependencies:
+    loose-envify "^1.4.0"
+    symbol-observable "^1.2.0"
+
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/regenerate-unicode-properties/-/regenerate-unicode-properties-8.2.0.tgz#e5de7111d655e7ba60c057dbe9ff37c87e65cdec"
@@ -10282,6 +10272,11 @@ swiper@4.4.2:
   dependencies:
     dom7 "^2.1.2"
     ssr-window "^1.0.1"
+
+symbol-observable@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+  integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
 
 table@^4.0.1:
   version "4.0.3"
