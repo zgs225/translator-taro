@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text, Input, Image } from '@tarojs/components'
+import { View, Input, Image } from '@tarojs/components'
 import Timer from '../../utils/timer'
 import Layout from '../../layouts/layout'
 import { bindActionCreators } from 'redux'
@@ -59,9 +59,34 @@ export default class Index extends Component<any> {
     setText(e.detail.value)
   }
 
+  onConfirm(e: any) {
+    const { search: { text } } = this.props
+
+    if (text.length == 0) {
+      return
+    }
+
+    Taro.request({
+      url: 'https://translator-api.dongnan.xin/v1/api/youdao',
+      data: {
+        q: text
+      },
+      success: (res: any) => {
+        if (res.statusCode === 200) {
+          Taro.navigateTo({
+            url: 'result',
+            success: (page: any) => {
+              page.eventChannel.emit('acceptData', res.data)
+            }
+          })
+        }
+      }
+    })
+  }
+
   onClearTapped() {
     const { reset } = this.props
-    reset()
+    setTimeout(reset, 60)
   }
 
   render () {
@@ -71,7 +96,10 @@ export default class Index extends Component<any> {
            <View className='header'>
               <View className='input-box'>
                 <Image src={searchIcon} className='search' mode='scaleToFill'></Image>
-                <Input placeholder='请输入单词或者句子' maxLength={256} confirmType='search' value={this.props.search.text} onInput={this.onInput}></Input>
+                <Input placeholder='请输入单词或者句子' maxLength={256} 
+                       confirmType='search' value={this.props.search.text} 
+                       onInput={this.onInput}
+                       onConfirm={this.onConfirm}></Input>
                 <Image src={closeIcon} className='close' mode='scaleToFill' onClick={this.onClearTapped}></Image>
               </View>
           </View>

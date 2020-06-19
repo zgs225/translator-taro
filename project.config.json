@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "translator-taro",
 	"description": "多国语言翻译",
-	"appid": "wx213ff01e7ec01ea8",
+	"appid": "wx973c4442f447b074",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,
@@ -22,10 +22,12 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": false
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"libVersion": "2.11.2",
 	"condition": {}
 }
