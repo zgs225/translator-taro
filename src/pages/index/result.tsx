@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux'
 
 import * as Actions from '../../actions/result'
 import './result.scss'
-import Styles from '../../assets/styles/common.scss'
 import toErrorMessage from '../../utils/youdao_error'
 
 @connect((state: any) => {

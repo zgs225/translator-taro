@@ -4,6 +4,7 @@ import Timer from '../../utils/timer'
 import Layout from '../../layouts/layout'
 import { bindActionCreators } from 'redux'
 import { connect } from '@tarojs/redux'
+import MyComponent from '../../utils/component'
 
 import './index.scss'
 
@@ -25,20 +26,12 @@ function mapDispatchToProps(dispatch: any) {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class Index extends Component<any> {
+export default class Index extends MyComponent<any> {
   protected timer: Timer = Timer.delay(300)
-
-  componentWillMount () { }
-
-  componentDidMount () { }
 
   componentWillUnmount () {
     this.timer.clear()
   }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
 
   /**
    * 指定config的类型声明为: Taro.Config
@@ -66,6 +59,8 @@ export default class Index extends Component<any> {
       return
     }
 
+    this.$setLoading(true)
+
     Taro.request({
       url: 'https://translator-api.dongnan.xin/v1/api/youdao',
       data: {
@@ -80,7 +75,8 @@ export default class Index extends Component<any> {
             }
           })
         }
-      }
+      },
+      complete: () => this.$setLoading(false)
     })
   }
 
