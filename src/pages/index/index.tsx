@@ -1,5 +1,5 @@
 import Taro, { Config } from '@tarojs/taro'
-import { View, Input, Image } from '@tarojs/components'
+import { View, Input, Image, Text } from '@tarojs/components'
 import Timer from '../../utils/timer'
 import Layout from '../../layouts/layout'
 import { bindActionCreators } from 'redux'
@@ -12,6 +12,7 @@ import searchIcon from '../../assets/icons/search.svg';
 import closeIcon from '../../assets/icons/close.svg';
 
 import * as Actions from '../../actions/search'
+import History from '../../utils/history'
 
 function mapStateToProps(state: any) {
   return {
@@ -28,6 +29,8 @@ function mapDispatchToProps(dispatch: any) {
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Index extends MyComponent<any> {
   protected timer: Timer = Timer.delay(300)
+
+  protected history = new History<String>('dict.history')
 
   componentWillUnmount () {
     this.timer.clear()
@@ -52,7 +55,7 @@ export default class Index extends MyComponent<any> {
     setText(e.detail.value)
   }
 
-  onConfirm(e: any) {
+  onConfirm() {
     const { search: { text } } = this.props
 
     if (text.length == 0) {
@@ -66,6 +69,7 @@ export default class Index extends MyComponent<any> {
       },
       success: (res: any) => {
         if (res.statusCode === 200) {
+          this.history.add(text)
           Taro.navigateTo({
             url: 'result',
             success: (page: any) => {
@@ -82,6 +86,40 @@ export default class Index extends MyComponent<any> {
     setTimeout(reset, 60)
   }
 
+  query(q: String) {
+    const { setText } = this.props
+    setText(q)
+    this.onConfirm()
+  }
+
+  protected renderHistory() {
+    let className = 'history'
+    const values = this.history.all() || []
+
+    if (values.length == 0) {
+      className += ' no-history'
+    }
+
+    const items = values.map((h, i) => {
+      return (
+        <View className='item' key={String(i)} onClick={() => this.query(h)}>
+          <Text>{h}</Text>
+        </View>
+      )
+    })
+
+    return (
+      <View className={className}>
+        <View className='title'>
+          <Text>历史</Text>
+        </View>
+        <View className='items'>
+          {items}
+        </View>
+      </View>
+    )
+  }
+
   render () {
     return (
       <Layout>
@@ -96,6 +134,8 @@ export default class Index extends MyComponent<any> {
                 <Image src={closeIcon} className='close' mode='scaleToFill' onClick={this.onClearTapped}></Image>
               </View>
           </View>
+
+          {this.renderHistory()}
         </View>
       </Layout>
     )

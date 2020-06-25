@@ -52,13 +52,10 @@ export default class Result extends Component<any> {
 
   renderBasic() {
     const { result } = this.props
+
     let className = 'basic'
 
-    if (!result.basic) {
-      className += ' no-basic'
-    }
-
-    const explains = (result.basic.explains || []).map((explain, i) => {
+    const explains = (result.basic && result.basic.explains || []).map((explain, i) => {
       return (
         <View className='explain' key={String(i)}>
           <Text>{explain}</Text>

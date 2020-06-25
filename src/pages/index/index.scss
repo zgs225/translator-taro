@@ -30,4 +30,24 @@
       }
     }
   }
+
+  .no-history {
+    display: none;
+  }
+
+  .history {
+    padding: 1rem;
+    border-radius: $borderRadius;
+    background-color: $lightWhite;
+    color: $darkJungleGreen;
+    margin: 1rem 0;
+
+    @include title;
+
+    .item {
+      margin: 0.5rem 0;
+      color: $tapueGray;
+      font-size: 1.2rem;
+    }
+  }
 }

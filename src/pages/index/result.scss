@@ -1,5 +1,9 @@
 @import '../../assets/styles/common.scss';
 
+.no-phonetic, .no-web {
+  display: none;
+}
+
 .container {
   .basic {
     padding: 1rem;
@@ -17,10 +21,6 @@
       margin-bottom: 0.8rem;
     }
 
-    .no-phonetic {
-      display: none;
-    }
-
     .explains {
       font-size: 1rem;
       .explain {
@@ -31,7 +31,7 @@
 
   .round-container {
     padding: 1rem;
-    border-radius: $borderRadius * 4;
+    border-radius: $borderRadius;
     position: relative;
     top: -3rem;
     background-color: white;
