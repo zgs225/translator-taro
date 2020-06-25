@@ -1,7 +1,7 @@
 @import '../../assets/styles/common.scss';
 
 .index {
-  padding: $paddingGap $paddingGap 2*$paddingGap $paddingGap;
+  padding: 1rem;
   background-color: $darkJungleGreen;
 
   .header {
@@ -15,7 +15,8 @@
       .search {
         height: 40px;
         width: 40px;
-        margin-right: $paddingGap;
+        position: relative;
+        top: -1px;
       }
 
       input {

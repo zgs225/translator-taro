@@ -7,8 +7,27 @@ $independency: #444554;
 $tapueGray: #7F7B82;
 $blackShadow: #BFACB5;
 $champagnePink: #E5D0CC;
+$lightWhite: #fafafa;
+$niagara: #0ca782;
 
 $navbarBackgroundColor: $darkJungleGreen;
+$textColor: $lightWhite;
 
 $paddingGap: 20px;
 $borderRadius: 7px;
+
+@mixin title {
+  .title {
+    color: $niagara;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+}
+
+page {
+  background-color: $darkJungleGreen;
+}
+
+:export {
+  darkJungleGreen: $darkJungleGreen
+}

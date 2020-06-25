@@ -1,0 +1,67 @@
+@import '../../assets/styles/common.scss';
+
+.container {
+  .basic {
+    padding: 1rem;
+    color: $textColor;
+    padding-bottom: 4rem;
+
+    .query {
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+      margin-bottom: .2rem;
+    }
+
+    .phonetic {
+      font-size: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .no-phonetic {
+      display: none;
+    }
+
+    .explains {
+      font-size: 1rem;
+      .explain {
+        margin-bottom: 0.1rem;
+      }
+    }
+  }
+
+  .round-container {
+    padding: 1rem;
+    border-radius: $borderRadius * 4;
+    position: relative;
+    top: -3rem;
+    background-color: white;
+    margin: 0 1rem;
+    color: $darkJungleGreen;
+  }
+
+  .translations {
+    margin-bottom: 1rem;
+    @include title;
+
+    .translation {
+      margin: 0.2rem 0;
+    }
+  }
+
+  .web {
+    @include title;
+
+    .web-item {
+      margin: 0.2rem 0 0.5rem 0;
+
+      .web-item-key {
+        margin-bottom: 0.2rem;
+      }
+
+      .web-item-value {
+        color: $tapueGray;
+        font-size: 0.85rem;
+      }
+    }
+  }
+}

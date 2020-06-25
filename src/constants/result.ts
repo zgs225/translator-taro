@@ -1,0 +1,1 @@
+export const SET_YOUDAO_RESULT = 'SET_YOUDAO_RESULT'

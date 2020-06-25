@@ -40,7 +40,8 @@ class App extends Component {
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: '猫猫多国语言词典',
       navigationBarTextStyle: 'white',
-      navigationStyle: 'custom'
+      navigationStyle: 'custom',
+      backgroundColor: '#172121'
     }
   }
 
