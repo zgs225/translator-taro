@@ -1,4 +1,4 @@
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro, { Config } from '@tarojs/taro'
 import { View, Input, Image } from '@tarojs/components'
 import Timer from '../../utils/timer'
 import Layout from '../../layouts/layout'
@@ -59,9 +59,7 @@ export default class Index extends MyComponent<any> {
       return
     }
 
-    this.$setLoading(true)
-
-    Taro.request({
+    this.$request({
       url: 'https://translator-api.dongnan.xin/v1/api/youdao',
       data: {
         q: text
@@ -75,8 +73,7 @@ export default class Index extends MyComponent<any> {
             }
           })
         }
-      },
-      complete: () => this.$setLoading(false)
+      }
     })
   }
 
