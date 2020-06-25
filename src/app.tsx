@@ -41,8 +41,11 @@ class App extends Component {
       navigationBarTitleText: '猫猫多国语言词典',
       navigationBarTextStyle: 'white',
       navigationStyle: 'custom',
-      backgroundColor: '#172121'
-    }
+      backgroundColor: '#172121',
+    },
+    networkTimeout: {
+      request: 10000
+    },
   }
 
   // 在 App 类中的 render() 函数没有实际作用

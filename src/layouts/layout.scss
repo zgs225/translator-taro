@@ -32,14 +32,13 @@
 
   .navbar {
     background-color: $navbarBackgroundColor;
-    color: #fefefe;
-    padding: 100px 0px $paddingGap $paddingGap;
+    color: $lightWhite;
 
     .left {
       display: flex;
       align-items: center;
 
-      .logo {
+      .logo, .back {
         height: 1.4rem;
       }
 

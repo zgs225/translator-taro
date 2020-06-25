@@ -58,9 +58,9 @@ export default class Result extends Component<any> {
       className += ' no-basic'
     }
 
-    const explains = (result.basic.explains || []).map((explain) => {
+    const explains = (result.basic.explains || []).map((explain, i) => {
       return (
-        <View className='explain'>
+        <View className='explain' key={String(i)}>
           <Text>{explain}</Text>
         </View>
       )
@@ -88,9 +88,9 @@ export default class Result extends Component<any> {
       className += ' no-translations'
     }
 
-    const translations = (result.translation || []).map(t => {
+    const translations = (result.translation || []).map((t, i) => {
       return (
-        <View className='translation'>
+        <View className='translation' key={String(i)}>
           <Text>{t}</Text>
         </View>
       )
@@ -113,16 +113,17 @@ export default class Result extends Component<any> {
       className += ' no-web'
     }
 
-    const elems = (result.web || []).map(w => {
-      const itemValues = (w.value || []).map(v => {
+    const elems = (result.web || []).map((w, i)=> {
+      const values = w.value || []
+      const itemValues = values.map((v, j) => {
         return (
-          <View className='web-item-value'>
+          <View className='web-item-value' key={String(j)}>
             <Text>{v}</Text>
           </View>
         )
       })
       return (
-        <View className='web-item'>
+        <View className='web-item' key={String(i)}>
           <View className='web-item-key'>
             <Text>{w.key}</Text>
           </View>
@@ -143,7 +144,7 @@ export default class Result extends Component<any> {
 
   render() {
     return (
-      <Layout>
+      <Layout navigateBack={true}>
         <View className='container'>
           {this.renderError()}
           {this.renderBasic()}
