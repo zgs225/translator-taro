@@ -20,6 +20,8 @@ import MyComponent from '../../utils/component'
   }
 })
 export default class Result extends MyComponent<any> {
+  protected audio?: Taro.InnerAudioContext
+
   config: Config = {
     usingComponents: {
       'Layout': '../../layouts/layout'
@@ -32,6 +34,37 @@ export default class Result extends MyComponent<any> {
       if (data) {
         const { setYoudaoResult } = this.props
         setYoudaoResult(data)
+      }
+    })
+  }
+
+  speak() {
+    if (this.audio) {
+      this.audio.play()
+      return
+    }
+    const { result } = this.props
+    const text = result.query
+    const lang = result.l.split('2')[0]
+
+    this.$request({
+      url: 'https://translator-api.dongnan.xin/v1/api/tts',
+      data: {
+        text,
+        lang
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      success: (resp) => {
+        const data = resp.data
+        if (data && data.code != undefined && data.code == 0) {
+          const audio = Taro.createInnerAudioContext()
+          audio.autoplay = true
+          audio.src = data.data.speak_url
+          this.audio = audio
+        }
       }
     })
   }
@@ -73,7 +106,7 @@ export default class Result extends MyComponent<any> {
         <View className={result.basic.phonetic ? 'phonetic' : 'phonetic no-phonetic'}>
           <Text>/{result.basic.phonetic}/</Text>
         </View>
-        <View className='speak'>
+        <View className='speak' onClick={this.speak}>
           <Image src={BellIcon} mode='scaleToFill' className='icon'></Image>
         </View>
         <View className='explains'>
