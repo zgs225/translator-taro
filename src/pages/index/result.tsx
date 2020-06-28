@@ -1,5 +1,5 @@
-import { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { Config } from '@tarojs/taro'
+import { View, Text, Image } from '@tarojs/components'
 import Layout from '../../layouts/layout'
 import { connect } from '@tarojs/redux'
 import { bindActionCreators } from 'redux'
@@ -7,6 +7,8 @@ import { bindActionCreators } from 'redux'
 import * as Actions from '../../actions/result'
 import './result.scss'
 import toErrorMessage from '../../utils/youdao_error'
+import BellIcon from '../../assets/icons/cat_bell_collar.svg'
+import MyComponent from '../../utils/component'
 
 @connect((state: any) => {
   return {
@@ -17,7 +19,7 @@ import toErrorMessage from '../../utils/youdao_error'
     ...bindActionCreators(Actions, dispatch)
   }
 })
-export default class Result extends Component<any> {
+export default class Result extends MyComponent<any> {
   config: Config = {
     usingComponents: {
       'Layout': '../../layouts/layout'
@@ -70,6 +72,9 @@ export default class Result extends Component<any> {
         </View>
         <View className={result.basic.phonetic ? 'phonetic' : 'phonetic no-phonetic'}>
           <Text>/{result.basic.phonetic}/</Text>
+        </View>
+        <View className='speak'>
+          <Image src={BellIcon} mode='scaleToFill' className='icon'></Image>
         </View>
         <View className='explains'>
           {explains}

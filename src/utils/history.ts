@@ -7,7 +7,7 @@ export default class History<T> {
 
   protected value: Array<T>
 
-  protected max = 20
+  protected max = 15
 
   constructor(name: string) {
     this.name = name

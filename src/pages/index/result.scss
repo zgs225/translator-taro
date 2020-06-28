@@ -9,16 +9,32 @@
     padding: 1rem;
     color: $textColor;
     padding-bottom: 4rem;
+    position: relative;
 
     .query {
       font-size: 1.5rem;
       line-height: 1.5rem;
       margin-bottom: .2rem;
+      margin-right: 2rem;
     }
 
     .phonetic {
       font-size: 0.8rem;
       margin-bottom: 0.8rem;
+      margin-right: 2rem;
+    }
+
+    .speak {
+      height: 2rem;
+      width: 2rem;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+
+      .icon {
+        height: 2rem;
+        max-width: 100%;
+      }
     }
 
     .explains {
