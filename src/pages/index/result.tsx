@@ -46,6 +46,12 @@ export default class Result extends MyComponent<any, any> {
     })
   }
 
+  componentWillUnmount() {
+    if (this.audio) {
+      this.audio.stop()
+    }
+  }
+
   speak() {
     if (this.audio) {
       this.audio.play()
@@ -124,8 +130,8 @@ export default class Result extends MyComponent<any, any> {
     })
 
     let speakClass = 'speak'
-
-    switch (this.state.speak_status) {
+    const { speak_status } = this.state
+    switch (speak_status) {
       case SpeakStatus.PLAYING:
         speakClass += ' playing'
         break
