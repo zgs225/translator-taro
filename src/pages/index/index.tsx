@@ -8,8 +8,9 @@ import MyComponent from '../../utils/component'
 
 import './index.scss'
 
-import searchIcon from '../../assets/icons/search.svg';
-import closeIcon from '../../assets/icons/close.svg';
+import searchIcon from '../../assets/icons/search.svg'
+import closeIcon from '../../assets/icons/close.svg'
+import clearIcon from '../../assets/icons/clear.svg'
 
 import * as Actions from '../../actions/search'
 import History from '../../utils/history'
@@ -112,12 +113,34 @@ export default class Index extends MyComponent<any, any> {
       <View className={className}>
         <View className='title'>
           <Text>历史</Text>
+          <Image onClick={this.clearHistory} src={clearIcon} mode='scaleToFill' className='clear-history'></Image>
         </View>
         <View className='items'>
           {items}
         </View>
       </View>
     )
+  }
+
+  clearHistory() {
+    Taro.showModal({
+      title: '警告',
+      content: '您确定要清空历史记录吗？',
+      showCancel: true,
+      success: (result) => {
+        if (result.confirm) {
+          this.history.clear()
+          Taro.showToast({
+            title: '已清空',
+            success: () => {
+              setTimeout(() => {
+                Taro.reLaunch({url: '/pages/index/index'})
+              }, 500)
+            }
+          })
+        }
+      }
+    })
   }
 
   render () {

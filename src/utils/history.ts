@@ -31,6 +31,15 @@ export default class History<T> {
       this.value.pop()
     }
 
+    this.sync()
+  }
+
+  clear() {
+    this.value = new Array<T>()
+    this.sync()
+  }
+
+  protected sync() {
     if (Taro && Taro.setStorageSync) {
       Taro.setStorageSync(this.name, this.value)
     }

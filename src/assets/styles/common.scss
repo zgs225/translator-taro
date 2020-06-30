@@ -28,6 +28,15 @@ page {
   background-color: $darkJungleGreen;
 }
 
+.clearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+
 @import './animations.scss';
 
 :export {
