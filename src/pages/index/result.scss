@@ -1,4 +1,5 @@
 @import '../../assets/styles/common.scss';
+@import '../../assets/styles/lds-ellipsis.scss';
 
 .no-phonetic, .no-web {
   display: none;
@@ -34,6 +35,23 @@
       .icon {
         height: 2rem;
         max-width: 100%;
+        animation: pendulum 0.2s ease 5;
+      }
+
+      .lds-ellipsis {
+        display: none;
+      }
+
+      &.playing {
+        .icon {
+          animation: pendulum 0.2s ease infinite;
+        }
+      }
+
+      &.loading {
+        .lds-ellipsis {
+          display: inline-block;
+        }
       }
     }
 

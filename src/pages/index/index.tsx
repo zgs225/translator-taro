@@ -27,7 +27,7 @@ function mapDispatchToProps(dispatch: any) {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class Index extends MyComponent<any> {
+export default class Index extends MyComponent<any, any> {
   protected timer: Timer = Timer.delay(300)
 
   protected history = new History<String>('dict.history')

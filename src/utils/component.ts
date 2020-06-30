@@ -11,7 +11,7 @@ import * as Actions from '../actions/page'
     ...bindActionCreators(Actions, dispatch)
   }
 })
-export default class MyComponent<P> extends Component<P> {
+export default class MyComponent<P, S> extends Component<P, S> {
   readonly props: Readonly<P> & Readonly<{setLoading?: any}>
 
   $setLoading(loading: boolean) {
@@ -19,14 +19,17 @@ export default class MyComponent<P> extends Component<P> {
     setLoading(loading)
   }
 
-  $request(option: Taro.request.Option) {
-    const oldComplete = option.complete
-    option.complete = (res: Taro.General.CallbackResult) => {
-      this.$setLoading(false)
-      oldComplete && oldComplete(res)
+  $request(option: Taro.request.Option, showLoading = true) {
+    if (showLoading) {
+      const oldComplete = option.complete
+      option.complete = (res: Taro.General.CallbackResult) => {
+        this.$setLoading(false)
+        oldComplete && oldComplete(res)
+      }
+  
+      this.$setLoading(true)
     }
 
-    this.$setLoading(true)
     return Taro.request(option)
   }
 }

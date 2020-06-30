@@ -28,6 +28,8 @@ page {
   background-color: $darkJungleGreen;
 }
 
+@import './animations.scss';
+
 :export {
   darkJungleGreen: $darkJungleGreen
 }

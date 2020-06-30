@@ -5,6 +5,7 @@ import { connect } from '@tarojs/redux'
 import { bindActionCreators } from 'redux'
 
 import * as Actions from '../../actions/result'
+import { SpeakStatus } from '../../constants/result'
 import './result.scss'
 import toErrorMessage from '../../utils/youdao_error'
 import BellIcon from '../../assets/icons/cat_bell_collar.svg'
@@ -19,12 +20,19 @@ import MyComponent from '../../utils/component'
     ...bindActionCreators(Actions, dispatch)
   }
 })
-export default class Result extends MyComponent<any> {
+export default class Result extends MyComponent<any, any> {
   protected audio?: Taro.InnerAudioContext
 
   config: Config = {
     usingComponents: {
       'Layout': '../../layouts/layout'
+    }
+  }
+
+  constructor(props: any) {
+    super(props)
+    this.state = {
+      speak_status: SpeakStatus.NORMAL,
     }
   }
 
@@ -47,6 +55,7 @@ export default class Result extends MyComponent<any> {
     const text = result.query
     const lang = result.l.split('2')[0]
 
+    this.setState({speak_status: SpeakStatus.PREPARING})
     this.$request({
       url: 'https://translator-api.dongnan.xin/v1/api/tts',
       data: {
@@ -57,16 +66,32 @@ export default class Result extends MyComponent<any> {
       header: {
         'content-type': 'application/x-www-form-urlencoded',
       },
+      fail: () => {
+        this.setState({speak_status: SpeakStatus.NORMAL})
+      },
       success: (resp) => {
         const data = resp.data
         if (data && data.code != undefined && data.code == 0) {
+          this.setState({speak_status: SpeakStatus.PREPARING})
           const audio = Taro.createInnerAudioContext()
-          audio.autoplay = true
+          audio.onWaiting(() => {
+            this.setState({speak_status: SpeakStatus.PREPARING})
+          })
+          audio.onCanplay(() => {
+            this.setState({speak_status: SpeakStatus.NORMAL})
+          })
+          audio.onPlay(() => {
+            this.setState({speak_status: SpeakStatus.PLAYING})
+          })
+          audio.onEnded(() => {
+            this.setState({speak_status: SpeakStatus.NORMAL})
+          })
           audio.src = data.data.speak_url
+          audio.autoplay = true
           this.audio = audio
         }
       }
-    })
+    }, false)
   }
 
   renderError() {
@@ -98,6 +123,17 @@ export default class Result extends MyComponent<any> {
       )
     })
 
+    let speakClass = 'speak'
+
+    switch (this.state.speak_status) {
+      case SpeakStatus.PLAYING:
+        speakClass += ' playing'
+        break
+      case SpeakStatus.PREPARING:
+        speakClass += ' loading'
+        break
+    }
+
     return (
       <View className={className}>
         <View className='query'>
@@ -106,8 +142,14 @@ export default class Result extends MyComponent<any> {
         <View className={result.basic.phonetic ? 'phonetic' : 'phonetic no-phonetic'}>
           <Text>/{result.basic.phonetic}/</Text>
         </View>
-        <View className='speak' onClick={this.speak}>
+        <View className={speakClass} onClick={this.speak}>
           <Image src={BellIcon} mode='scaleToFill' className='icon'></Image>
+          <View className='lds-ellipsis'>
+            <View className='dot'></View>
+            <View className='dot'></View>
+            <View className='dot'></View>
+            <View className='dot'></View>
+          </View>
         </View>
         <View className='explains'>
           {explains}

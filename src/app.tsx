@@ -15,14 +15,6 @@ import './app.scss'
 
 class App extends Component {
 
-  componentDidMount () {}
-
-  componentDidShow () {}
-
-  componentDidHide () {}
-
-  componentDidCatchError () {}
-
   /**
    * 指定config的类型声明为: Taro.Config
    *
