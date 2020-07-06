@@ -28,6 +28,49 @@
         width: 60px;
       }
     }
+
+    .no-suggestions {
+      display: none;
+    }
+
+    .suggestions {
+      background: $lightWhite;
+      font-size: 1rem;
+      padding: 1rem;
+      transition: height 1s ease;
+      max-height: 20rem;
+      width: auto;
+
+      .suggestion {
+        padding: 1rem 0;
+        border-bottom: 1px solid $champagnePink;
+        overflow: hidden;
+
+        &:hover, &:focus, &:active {
+          color: $niagara;
+        }
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        &:last-child {
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+
+        .value {
+          margin-right: 0.5rem;
+          @include nobreak;
+        }
+
+        .label {
+          font-size: 0.6rem;
+          color: darken($color: $lightWhite, $amount: 30%);
+          @include nobreak;
+        }
+      }
+    }
   }
 
   .no-history {

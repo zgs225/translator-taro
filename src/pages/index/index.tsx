@@ -1,5 +1,5 @@
 import Taro, { Config } from '@tarojs/taro'
-import { View, Input, Image, Text } from '@tarojs/components'
+import { View, Input, Image, Text, ScrollView } from '@tarojs/components'
 import Timer from '../../utils/timer'
 import Layout from '../../layouts/layout'
 import { bindActionCreators } from 'redux'
@@ -14,6 +14,7 @@ import clearIcon from '../../assets/icons/clear.svg'
 
 import * as Actions from '../../actions/search'
 import History from '../../utils/history'
+import { Suggestion } from '../../models/suggestion'
 
 function mapStateToProps(state: any) {
   return {
@@ -29,9 +30,17 @@ function mapDispatchToProps(dispatch: any) {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Index extends MyComponent<any, any> {
-  protected timer: Timer = Timer.delay(300)
+  protected timer: Timer = Timer.delay(500)
 
   protected history = new History<String>('dict.history')
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      suggestions: new Array<Suggestion>()
+    }
+  }
 
   componentWillUnmount () {
     this.timer.clear()
@@ -45,7 +54,6 @@ export default class Index extends MyComponent<any, any> {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '多国翻译词典',
     usingComponents: {
       'Layout': '../../layouts/layout'
     }
@@ -54,6 +62,26 @@ export default class Index extends MyComponent<any, any> {
   onInput(e: any) {
     const { setText } = this.props
     setText(e.detail.value)
+
+    this.timer.clear()
+    this.setState({suggestions: new Array<Suggestion>()})
+
+    if (e.detail.value.length > 3) {
+      const vm = this
+      this.timer.run(() => {
+        this.$request({
+          url: 'https://translator-api.dongnan.xin/v1/api/suggest',
+          data: { q: e.detail.value },
+          success: (res) => {
+            if (res.statusCode == 200) {
+              if (res.data.code != undefined && res.data.code === 0) {
+                vm.setState({suggestions: res.data.data})
+              }
+            }
+          }
+        })
+      })
+    }
   }
 
   onConfirm() {
@@ -84,7 +112,10 @@ export default class Index extends MyComponent<any, any> {
 
   onClearTapped() {
     const { reset } = this.props
-    setTimeout(reset, 60)
+    setTimeout(() => {
+      reset()
+      this.setState({suggestions: new Array<Suggestion>()})
+    }, 60)
   }
 
   query(q: String) {
@@ -113,12 +144,37 @@ export default class Index extends MyComponent<any, any> {
       <View className={className}>
         <View className='title'>
           <Text>历史</Text>
-          <Image onClick={this.clearHistory} src={clearIcon} mode='scaleToFill' className='clear-history'></Image>
+          <Image onClick={this.clearHistory} src={clearIcon} 
+                 mode='scaleToFill' className='clear-history'>
+          </Image>
         </View>
         <View className='items'>
           {items}
         </View>
       </View>
+    )
+  }
+
+  renderSuggestions() {
+    let className = 'suggestions'
+
+    if (this.state.suggestions.length === 0) {
+      className += ' no-suggestions'
+    }
+
+    const items = this.state.suggestions.map((v, i) => {
+      return (
+        <View className='suggestion' key={String(i)} onClick={() => this.query(v.value)}>
+          <Text className='value'>{v.value}</Text>
+          <Text className='label'>{v.label.replace('\\n', ' ')}</Text>
+        </View>
+      )
+    })
+
+    return (
+      <ScrollView className={className} scrollY scrollWithAnimation>
+        {items}
+      </ScrollView>
     )
   }
 
@@ -156,8 +212,8 @@ export default class Index extends MyComponent<any, any> {
                        onConfirm={this.onConfirm}></Input>
                 <Image src={closeIcon} className='close' mode='scaleToFill' onClick={this.onClearTapped}></Image>
               </View>
+              {this.renderSuggestions()}
           </View>
-
           {this.renderHistory()}
         </View>
       </Layout>

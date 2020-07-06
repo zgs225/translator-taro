@@ -24,6 +24,16 @@ $borderRadius: 7px;
   }
 }
 
+@mixin nobreak {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin point5border($color) {
+  background-image: linear-gradient(to bottom, $color 0%, $color 51%, transparent 51%);
+  background-size: 100% 1px;
+}
+
 page {
   background-color: $darkJungleGreen;
 }
