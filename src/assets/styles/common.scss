@@ -16,6 +16,8 @@ $textColor: $lightWhite;
 $paddingGap: 20px;
 $borderRadius: 7px;
 
+@import './animations.scss';
+
 @mixin title {
   .title {
     color: $niagara;
@@ -34,6 +36,10 @@ $borderRadius: 7px;
   background-size: 100% 1px;
 }
 
+@mixin loading {
+  animation: ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
 page {
   background-color: $darkJungleGreen;
 }
@@ -46,8 +52,9 @@ page {
   }
 }
 
-
-@import './animations.scss';
+.hide {
+  display: none;
+}
 
 :export {
   darkJungleGreen: $darkJungleGreen

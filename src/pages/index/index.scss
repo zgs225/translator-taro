@@ -5,6 +5,8 @@
   background-color: $darkJungleGreen;
 
   .header {
+    position: relative;
+
     .input-box {
       display: flex;
       align-items: center;
@@ -27,6 +29,13 @@
         height: 60px;
         width: 60px;
       }
+
+      .loading {
+        height: 30px;
+        width: 30px;
+        color: $darkJungleGreen;
+        @include loading;
+      }
     }
 
     .no-suggestions {
@@ -36,26 +45,26 @@
     .suggestions {
       background: $lightWhite;
       font-size: 1rem;
-      padding: 1rem;
       transition: height 1s ease;
       max-height: 20rem;
       width: auto;
+      position: absolute;
+      left: 0;
+      right: 0;
 
       .suggestion {
-        padding: 1rem 0;
+        position: relative;
+        padding: 1rem 1rem;
         border-bottom: 1px solid $champagnePink;
         overflow: hidden;
+        border-bottom-left-radius: $borderRadius;
+        border-bottom-right-radius: $borderRadius;
 
         &:hover, &:focus, &:active {
           color: $niagara;
         }
 
-        &:first-child {
-          padding-top: 0;
-        }
-
         &:last-child {
-          padding-bottom: 0;
           border-bottom: none;
         }
 

@@ -11,6 +11,7 @@ import './index.scss'
 import searchIcon from '../../assets/icons/search.svg'
 import closeIcon from '../../assets/icons/close.svg'
 import clearIcon from '../../assets/icons/clear.svg'
+import loadingIcon from '../../assets/icons/loading-black.svg'
 
 import * as Actions from '../../actions/search'
 import History from '../../utils/history'
@@ -38,7 +39,8 @@ export default class Index extends MyComponent<any, any> {
     super(props)
 
     this.state = {
-      suggestions: new Array<Suggestion>()
+      suggestions: new Array<Suggestion>(),
+      suggestionsLoading: false,
     }
   }
 
@@ -64,22 +66,29 @@ export default class Index extends MyComponent<any, any> {
     setText(e.detail.value)
 
     this.timer.clear()
-    this.setState({suggestions: new Array<Suggestion>()})
+    this.setState({
+      suggestions: new Array<Suggestion>(),
+      suggestionsLoading: false,
+    })
 
     if (e.detail.value.length > 3) {
       const vm = this
       this.timer.run(() => {
+        vm.setState({suggestionsLoading: true})
         this.$request({
           url: 'https://translator-api.dongnan.xin/v1/api/suggest',
           data: { q: e.detail.value },
           success: (res) => {
             if (res.statusCode == 200) {
-              if (res.data.code != undefined && res.data.code === 0) {
+              if (res.data.code != undefined && res.data.code === 0 && this.state.suggestionsLoading) {
                 vm.setState({suggestions: res.data.data})
               }
             }
+          },
+          complete: () => {
+            vm.setState({suggestionsLoading: false})
           }
-        })
+        }, false)
       })
     }
   }
@@ -200,6 +209,10 @@ export default class Index extends MyComponent<any, any> {
   }
 
   render () {
+    let loadingView = (
+     <Image src={loadingIcon} className={this.state.suggestionsLoading ? 'loading' : 'loading hide'} mode='scaleToFill'></Image>
+    )
+
     return (
       <Layout>
         <View className='index'>
@@ -210,6 +223,7 @@ export default class Index extends MyComponent<any, any> {
                        confirmType='search' value={this.props.search.text} 
                        onInput={this.onInput}
                        onConfirm={this.onConfirm}></Input>
+                {loadingView}
                 <Image src={closeIcon} className='close' mode='scaleToFill' onClick={this.onClearTapped}></Image>
               </View>
               {this.renderSuggestions()}
