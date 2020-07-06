@@ -51,14 +51,15 @@
       position: absolute;
       left: 0;
       right: 0;
+      border-bottom-left-radius: $borderRadius;
+      border-bottom-right-radius: $borderRadius;
+      box-shadow: 0 2px 1rem rgba(0, 0, 0, 0.2);
 
       .suggestion {
         position: relative;
         padding: 1rem 1rem;
-        border-bottom: 1px solid $champagnePink;
+        border-bottom: 0.5px solid $champagnePink;
         overflow: hidden;
-        border-bottom-left-radius: $borderRadius;
-        border-bottom-right-radius: $borderRadius;
 
         &:hover, &:focus, &:active {
           color: $niagara;

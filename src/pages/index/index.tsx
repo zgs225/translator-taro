@@ -216,7 +216,7 @@ export default class Index extends MyComponent<any, any> {
     return (
       <Layout>
         <View className='index'>
-           <View className='header'>
+           <View className='header clearfix'>
               <View className='input-box'>
                 <Image src={searchIcon} className='search' mode='scaleToFill'></Image>
                 <Input placeholder='请输入单词或者句子' maxLength={256} 
