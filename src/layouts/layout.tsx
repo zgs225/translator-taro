@@ -4,11 +4,41 @@ import './layout.scss'
 import CatIcon from '../assets/icons/cat_walk.svg'
 import LoadingIcon from '../assets/icons/loading.svg'
 import BackIcon from '../assets/icons/back.svg'
+import DictIcon from '../assets/icons/dict.svg'
+import TranslateIcon from '../assets/icons/Translate.svg'
+import PawIcon from '../assets/icons/paw.svg'
 import MyComponent from '../utils/component'
+import { Route } from '../models/route'
+import TabBar from '../components/tabbar/tabbar'
+import { Config } from '@tarojs/taro'
 
 
-export default class Layout extends MyComponent {
-  constructor(props) {
+export default class Layout extends MyComponent<any, any> {
+  protected readonly routes: Array<Route> = [
+    {
+      path: '/pages/index/index',
+      label: '词典',
+      icon: DictIcon,
+    },
+    {
+      path: '/pages/translate/index',
+      label: '翻译',
+      icon: TranslateIcon
+    },
+    {
+      path: '/pages/user/index',
+      label: '我的',
+      icon: PawIcon
+    }
+  ]
+
+  config: Config = {
+    usingComponents: {
+      'TabBar': '../components/tabbar/tabbar'
+    }
+  }
+
+  constructor(props: any) {
     super(props)
     this.state = {
       statusBarHeight: 0,
@@ -63,6 +93,10 @@ export default class Layout extends MyComponent {
 
         <View className="app-body">
           {this.props.children}
+        </View>
+
+        <View className='app-footer'>
+          <TabBar routes={this.routes}></TabBar>
         </View>
       </View>
     )

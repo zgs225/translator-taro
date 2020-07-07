@@ -1,0 +1,22 @@
+@import '../../assets/styles/variables.scss';
+
+.tabbar {
+  display: flex;
+  justify-content: space-between;
+  background: $lightWhite;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: $darkJungleGreen;
+
+  .item {
+    position: relative;
+    margin: 1rem;
+
+    .icon {
+      height: 2rem;
+      width: 100%;
+    }
+  }
+}
