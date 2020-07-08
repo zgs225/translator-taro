@@ -54,6 +54,7 @@
       border-bottom-left-radius: $borderRadius;
       border-bottom-right-radius: $borderRadius;
       box-shadow: 0 2px 1rem rgba(0, 0, 0, 0.2);
+      z-index: 10;
 
       .suggestion {
         position: relative;
@@ -88,11 +89,14 @@
   }
 
   .history {
-    padding: 1rem;
     border-radius: $borderRadius;
     background-color: $lightWhite;
     color: $darkJungleGreen;
     margin: 1rem 0;
+    box-sizing: border-box;
+    position: relative;
+    max-height: 26rem;
+    overflow: hidden;
 
     @include title;
 
@@ -100,6 +104,7 @@
       display: flex;
       justify-content: space-between;
       align-items: start;
+      padding: 1rem;
 
       .clear-history {
         width: 1.5rem;
@@ -111,6 +116,7 @@
       margin: 0.5rem 0;
       color: $tapueGray;
       font-size: 1.2rem;
+      padding: 0 1rem;
     }
   }
 }

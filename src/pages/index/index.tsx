@@ -150,7 +150,7 @@ export default class Index extends MyComponent<any, any> {
     })
 
     return (
-      <View className={className}>
+      <ScrollView className={className} scrollY scrollWithAnimation>
         <View className='title'>
           <Text>历史</Text>
           <Image onClick={this.clearHistory} src={clearIcon} 
@@ -160,7 +160,7 @@ export default class Index extends MyComponent<any, any> {
         <View className='items'>
           {items}
         </View>
-      </View>
+      </ScrollView>
     )
   }
 
