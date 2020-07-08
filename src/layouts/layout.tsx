@@ -5,8 +5,11 @@ import CatIcon from '../assets/icons/cat_walk.svg'
 import LoadingIcon from '../assets/icons/loading.svg'
 import BackIcon from '../assets/icons/back.svg'
 import DictIcon from '../assets/icons/dict.svg'
+import ActivedDictIcon from '../assets/icons/actived_dict.svg'
 import TranslateIcon from '../assets/icons/Translate.svg'
+import ActivedTranslateIcon from '../assets/icons/actived_translate.svg'
 import PawIcon from '../assets/icons/paw.svg'
+import ActivedPawIcon from '../assets/icons/actived_paw.svg'
 import MyComponent from '../utils/component'
 import { Route } from '../models/route'
 import TabBar from '../components/tabbar/tabbar'
@@ -16,19 +19,22 @@ import { Config } from '@tarojs/taro'
 export default class Layout extends MyComponent<any, any> {
   protected readonly routes: Array<Route> = [
     {
-      path: '/pages/index/index',
+      path: 'pages/index/index',
       label: '词典',
       icon: DictIcon,
+      activedIcon: ActivedDictIcon
     },
     {
-      path: '/pages/translate/index',
+      path: 'pages/translate/index',
       label: '翻译',
-      icon: TranslateIcon
+      icon: TranslateIcon,
+      activedIcon: ActivedTranslateIcon,
     },
     {
-      path: '/pages/user/index',
+      path: 'pages/user/index',
       label: '我的',
-      icon: PawIcon
+      icon: PawIcon,
+      activedIcon: ActivedPawIcon
     }
   ]
 

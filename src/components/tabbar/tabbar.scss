@@ -3,19 +3,25 @@
 .tabbar {
   display: flex;
   justify-content: space-between;
-  background: $lightWhite;
+  background: darken($color: $lightWhite, $amount: 5%);
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   color: $darkJungleGreen;
+  box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
 
   .item {
     position: relative;
-    margin: 1rem;
+    margin: 0.7rem 3rem;
+    font-size: 0.7rem;
+
+    &.actived {
+      color: $niagara;
+    }
 
     .icon {
-      height: 2rem;
+      height: 1.5rem;
       width: 100%;
     }
   }
