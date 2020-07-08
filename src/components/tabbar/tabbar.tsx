@@ -7,16 +7,27 @@ import './tabbar.scss'
 export default class TabBar extends MyComponent<{routes: Array<Route>}, any> {
   constructor(props: {routes: Array<Route>}) {
     super(props)
+
+    this.state = {
+      curRoute: null,
+    }
+  }
+
+  componentDidShow() {
+    const pages = Taro.getCurrentPages()
+    const page = pages[pages.length - 1]
+    this.setState({
+      curRoute: { path: page.route },
+    })
   }
 
   renderRuotes() {
     const routes = this.props.routes || []
-    const pages = Taro.getCurrentPages()
-    const page = pages[pages.length - 1]
+    const curRoute = this.state.curRoute
   
     return routes.map((route: Route) => {
       let className = 'item'
-      const actived = page && page.route === route.path
+      const actived = curRoute && curRoute.path === route.path
       if (actived) {
         className += ' actived'
       }
