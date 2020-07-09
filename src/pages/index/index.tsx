@@ -80,7 +80,8 @@ export default class Index extends MyComponent<any, any> {
           data: { q: e.detail.value },
           success: (res) => {
             if (res.statusCode == 200) {
-              if (res.data.code != undefined && res.data.code === 0 && this.state.suggestionsLoading) {
+              const { suggestionsLoading } = this.state
+              if (res.data.code != undefined && res.data.code === 0 && suggestionsLoading) {
                 vm.setState({suggestions: res.data.data})
               }
             }
@@ -166,12 +167,13 @@ export default class Index extends MyComponent<any, any> {
 
   renderSuggestions() {
     let className = 'suggestions'
+    const { suggestions } = this.state
 
-    if (this.state.suggestions.length === 0) {
+    if (suggestions.length === 0) {
       className += ' no-suggestions'
     }
 
-    const items = this.state.suggestions.map((v, i) => {
+    const items = suggestions.map((v, i) => {
       return (
         <View className='suggestion' key={String(i)} onClick={() => this.query(v.value)}>
           <Text className='value'>{v.value}</Text>
@@ -209,8 +211,9 @@ export default class Index extends MyComponent<any, any> {
   }
 
   render () {
+    const { suggestionsLoading } = this.state
     let loadingView = (
-     <Image src={loadingIcon} className={this.state.suggestionsLoading ? 'loading' : 'loading hide'} mode='scaleToFill'></Image>
+     <Image src={loadingIcon} className={suggestionsLoading ? 'loading' : 'loading hide'} mode='scaleToFill'></Image>
     )
 
     return (

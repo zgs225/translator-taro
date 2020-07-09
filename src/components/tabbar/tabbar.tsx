@@ -23,7 +23,7 @@ export default class TabBar extends MyComponent<{routes: Array<Route>}, any> {
 
   renderRuotes() {
     const routes = this.props.routes || []
-    const curRoute = this.state.curRoute
+    const { curRoute } = this.state
   
     return routes.map((route: Route) => {
       let className = 'item'
