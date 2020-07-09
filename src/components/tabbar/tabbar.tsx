@@ -4,8 +4,8 @@ import { View, Image, Text } from '@tarojs/components';
 
 import './tabbar.scss'
 
-export default class TabBar extends MyComponent<{routes: Array<Route>}, any> {
-  constructor(props: {routes: Array<Route>}) {
+export default class TabBar extends MyComponent<{routes: Array<Route>} & any, any> {
+  constructor(props: {routes: Array<Route>} & any) {
     super(props)
 
     this.state = {
@@ -22,7 +22,7 @@ export default class TabBar extends MyComponent<{routes: Array<Route>}, any> {
   }
 
   renderRuotes() {
-    const routes = this.props.routes || []
+    const { routes = [] } = this.props
     const { curRoute } = this.state
   
     return routes.map((route: Route) => {
